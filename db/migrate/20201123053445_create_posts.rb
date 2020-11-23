@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.boolean :is_confirm
       t.string :image
       t.string :content
-      t.boolean :active
+      t.boolean :active, default: true
       
       t.references :user, null: false, foreign_key: true
       t.references :country, null: false, foreign_key: true

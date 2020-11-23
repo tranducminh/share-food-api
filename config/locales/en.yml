@@ -1,33 +1,38 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  errors:
+    something_wrong: Something went wrong
+    email_not_found: Email not found
+    user_not_found: User not found
+    auth_token_not_found: Authorization token not found
+    request_id_not_found: Request ID not found
+    incorrect_password: Password is incorrect
+    blank_password: Password can not be blank
+    incorrect_password_confirm: Password and confirmation do not match
+    invalid_reset_password_token: Invalid reset password token
+    expired_reset_password_token: Reset password token was expired
+    required: is required
+    not_allowed: not allowed to do this action
+    not_allowed_to_change_position: not allowed to change position
+    phone: Phone number is invalid
+    update: Update failed
+    invalid_user: Invalid user
+    already_approved: This request is already approved
+    already_rejected: This request is already rejected
+  success:
+    common: Successful
+    login: Login successfully
+    signup: Signup successfully
+    update: Update successful
+    reset_password: Reset password successfully
+    sent_reset_password_mail: Reset password email was sent
+    valid_reset_password_token: Valid reset password token
+    request: Create request successfully
+  request:
+    login: User not found please log in
+  user_mailer:
+    reset_password_title: Reset password AWM account
+    password_reset:
+      title: Reset password
+      description: To reset password, please click link below
+      expiration: Link will be expired in 20 hours
+      warning: If you do not request to reset password, please skip this email
