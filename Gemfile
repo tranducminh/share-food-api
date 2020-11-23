@@ -1,7 +1,7 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+source "https://rubygems.org"
+git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
-ruby '2.7.0'
+ruby "2.7.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "activesupport", "6.0.3.4"
@@ -25,7 +25,7 @@ gem "public_suffix", "4.0.5"
 gem "puma", "4.3.5"
 gem "pusher"
 gem "rack-cors"
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem "rails", "~> 6.0.3", ">= 6.0.3.4"
 gem "rails-i18n"
 gem "rubocop", "0.89.1"
 gem "rubocop-ast", "0.3.0"

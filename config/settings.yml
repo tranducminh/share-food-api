@@ -1,0 +1,22 @@
+validations:
+  user:
+    email:
+      regex: !ruby/regexp /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+      max_length: 255
+    password:
+      min_length: 6
+    name:
+      max_length: 25
+  post:
+    title:
+      max_length: 50
+    food_name:
+      max_length: 50
+    content:
+      max_length: 1000
+  food_type:
+    name:
+      max_length: 20
+  country:
+    name:
+      max_length: 20
