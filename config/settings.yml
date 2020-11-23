@@ -20,3 +20,4 @@ validations:
   country:
     name:
       max_length: 20
+expire_token_time: 20

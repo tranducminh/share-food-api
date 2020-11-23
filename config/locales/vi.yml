@@ -1,0 +1,38 @@
+vi:
+  errors:
+    something_wrong: Đã xảy ra lỗi
+    email_not_found: Không tìm thấy email
+    user_not_found: Không tìm thấy user
+    auth_token_not_found: Authorization token không được bỏ trống
+    request_id_not_found: Request ID không được bỏ trống
+    incorrect_password: Sai mật khẩu
+    blank_password: Mật khẩu không thể để trống
+    incorrect_password_confirm: Xác nhận mật khẩu không khớp
+    invalid_reset_password_token: Token thay đổi mật khẩu không hợp lệ
+    expired_reset_password_token: Token thay đổi mật khẩu đã hết hạn
+    required: không được bỏ trống
+    not_allowed: Không được phép thực hiện
+    not_allowed_to_change_position: không cho phép thay đổi vị trí
+    phone: số điện thoại không hợp lệ
+    update: Cập nhật không thành công
+    invalid_user: User không hợp lệ
+    already_approved: Yêu cầu này đã được chấp nhận
+    already_rejected: Yêu cầu này đã được từ chối
+  success:
+    common: Thành công
+    login: Đăng nhập thành công
+    signup: Đăng ký thành công
+    update: Câp nhật thành công
+    reset_password: Thay đổi mật khẩu thành công
+    sent_reset_password_mail: Email thay đổi mật khẩu đã được gửi đến mail của bạn
+    valid_reset_password_token: Token thay đổi mật khẩu hợp lệ
+    request: Tạo yêu cầu thành công
+  request:
+    login: Không tìm thấy user hãy đăng nhập trước
+  user_mailer:
+    reset_password_title: Thay đổi mật khẩu tài khoản AWM
+    password_reset:
+      title: Thay đổi mật khẩu
+      description: Để thay đổi mật khẩu hãy nhấn vào link phía dưới
+      expiration: Đường link sẽ hết hạn trong 20 tiếng
+      warning: Nếu bạn không yêu cầu thay đổi mật khẩu, hãy bỏ qua email này
