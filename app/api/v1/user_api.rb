@@ -21,4 +21,31 @@ class UserApi < ApiV1
       end
     end
   end
+
+  namespace :profile do
+    before do
+      authenticated
+    end
+
+    desc "Show profile"
+    get "/" do
+      return render_success_response(:ok, UserFormat, current_user, I18n.t("success.signup"))
+    end
+
+    desc "Update profile"
+    params do
+      optional :name, type: String, allow_blank: false
+      optional :birthday, type: String, allow_blank: false
+      optional :gender, type: String, allow_blank: false
+      optional :avatar, type: String, allow_blank: false
+    end
+    put "/" do
+      data = valid_params(params, User::UPDATE_PROFILE_PARAMS)
+      if user = User.update(current_user.id, data)
+        render_success_response(:ok, UserFormat, user, I18n.t("success.update"))
+      else
+        error!(I18n.t("errors.update"), :bad_request)
+      end
+    end
+  end
 end

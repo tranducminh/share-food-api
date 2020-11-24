@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_11_23_053543) do
 
   create_table "bookmarks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.boolean "active"
+    t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(version: 2020_11_23_053543) do
 
   create_table "countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "food_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_053543) do
     t.boolean "is_confirm"
     t.string "image"
     t.string "content"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.bigint "country_id", null: false
     t.bigint "food_type_id", null: false
@@ -57,11 +57,13 @@ ActiveRecord::Schema.define(version: 2020_11_23_053543) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
     t.boolean "gender"
     t.boolean "is_admin"
     t.string "birthday"
     t.string "avatar", default: "https://www.gravatar.com/avatar/86b862d65a8e66b9db99136cd16ff394?default=https%3A%2F%2Fcloud.digitalocean.com%2Favatars%2Fdefault1.png&amp;secure=true"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

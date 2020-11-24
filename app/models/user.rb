@@ -1,7 +1,10 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = Settings.validations.user.email.regex
   PARAMS = %i(name email password password_confirmation).freeze
+  UPDATE_PROFILE_PARAMS = %i(name gender birthday avatar).freeze
 
+  attr_accessor :reset_token
+  
   has_many :posts, dependent: :nullify
   has_many :bookmarks, dependent: :nullify
 
@@ -36,6 +39,26 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+  end
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < Settings.expire_token_time.hours.ago
+  end
+
+  def valid_reset_password? token
+    digest = send :reset_digest
+    return false unless digest
+
+    BCrypt::Password.new(digest).is_password? token
   end
 
   private
