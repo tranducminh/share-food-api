@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   delegate :name, to: :country, prefix: true
   delegate :name, to: :food_type, prefix: true
 
+  scope :filter_confirm, ->(is_confirm) { where is_confirm: is_confirm}
+
   validates :title, presence: true, allow_nil: false,
     length: {maximum: Settings.validations.post.title.max_length}
   validates :content, presence: true, allow_nil: false,

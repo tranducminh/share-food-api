@@ -27,6 +27,7 @@ vi:
     sent_reset_password_mail: Email thay đổi mật khẩu đã được gửi đến mail của bạn
     valid_reset_password_token: Token thay đổi mật khẩu hợp lệ
     request: Tạo yêu cầu thành công
+    get_post: Lấy thông tin bài viết thành công
   request:
     login: Không tìm thấy user hãy đăng nhập trước
   user_mailer:
