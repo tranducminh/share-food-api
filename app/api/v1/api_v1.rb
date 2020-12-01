@@ -4,6 +4,7 @@ class ApiV1 < Grape::API
   version "v1", using: :path
 
   mount AuthApi
+  mount PostApi
   mount UserApi
   mount ResetPasswordApi
 end
