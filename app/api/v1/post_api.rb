@@ -1,5 +1,17 @@
 class PostApi < ApiV1
-  namespace :post do
+  namespace :posts do
+    desc "post details"
+    get "/:id" do
+      post = valid_post params[:id]
+      render_success_response(:ok, PostFormat, post, I18n.t("success.get_post"))
+    end
+
+    desc "get all post for user"
+    get "/" do
+      posts = Post.all.filter_confirm(true)
+      render_success_response(:ok, PostFormat, posts, I18n.t("success.get_post"))
+    end
+
     desc "create post"
     params do
       requires :title, type: String, message: I18n.t("errors.required")

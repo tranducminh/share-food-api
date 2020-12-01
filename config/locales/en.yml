@@ -27,6 +27,7 @@ en:
     sent_reset_password_mail: Reset password email was sent
     valid_reset_password_token: Valid reset password token
     request: Create request successfully
+    get_post: Get post successfully
   request:
     login: User not found please log in
   user_mailer:
