@@ -2,7 +2,7 @@ module PostHelper
   include AuthHelper
 
   def valid_user post_id
-    post = valid_request post_id
+    post = valid_post post_id
     return true if post.user_id == current_user.id
 
     error!(I18n.t("errors.invalid_user"), :bad_request)

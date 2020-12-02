@@ -10,4 +10,8 @@ module UserHelper
     error!(I18n.t("errors.user_not_found"), :bad_request) unless user
     user
   end
+
+  def valid_admin
+    error!(I18n.t("errors.invalid_user"), :forbidden) unless current_user.is_admin == true
+  end
 end

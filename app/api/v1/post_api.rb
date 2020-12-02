@@ -1,5 +1,23 @@
 class PostApi < ApiV1
   namespace :posts do
+    desc "get all post which not be confirmed for admin"
+    get "/unconfirmed" do
+      valid_admin
+      posts = Post.all.filter_confirm(false)
+      render_success_response(:ok, PostFormat, posts, I18n.t("success.get_post"))
+    end
+
+    desc "only admin can confirm a post"
+    put "/:id/confirm" do
+      valid_admin
+      post = valid_post params[:id]
+      if post = Post.update(params[:id], {is_confirm: true})
+        render_success_response(:ok, PostFormat, post, I18n.t("success.update"))
+      else
+        error! I18n.t("errors.update"), :bad_request
+      end
+    end
+
     desc "post details"
     get "/:id" do
       post = valid_post params[:id]
@@ -44,11 +62,11 @@ class PostApi < ApiV1
     end
     put "/:id/update" do
       valid_user params[:id]
-      valid_post params[:id]
+      post = valid_post params[:id]
       error! I18n.t("errors.update"), :bad_request unless post.is_confirm == false
 
       data = valid_params(params, Post::PARAMS)
-      if request = Request.update(params[:id], data)
+      if post = Post.update(params[:id], data)
         render_success_response(:ok, PostFormat, post, I18n.t("success.update"))
       else
         error! I18n.t("errors.update"), :bad_request
