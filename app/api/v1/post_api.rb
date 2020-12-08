@@ -4,7 +4,7 @@ class PostApi < ApiV1
     get "/unconfirmed" do
       valid_admin
       posts = Post.all.filter_confirm(false)
-      render_success_response(:ok, PostFormat, posts, I18n.t("success.get_post"))
+      render_success_response(:ok, UnconfirmPostFormat, posts, I18n.t("success.get_post"))
     end
 
     desc "only admin can confirm a post"
@@ -12,7 +12,7 @@ class PostApi < ApiV1
       valid_admin
       post = valid_post params[:id]
       if post = Post.update(params[:id], {is_confirm: true})
-        render_success_response(:ok, PostFormat, post, I18n.t("success.update"))
+        render_success_response(:ok, UnconfirmPostFormat, post, I18n.t("success.update"))
       else
         error! I18n.t("errors.update"), :bad_request
       end
@@ -21,13 +21,28 @@ class PostApi < ApiV1
     desc "post details"
     get "/:id" do
       post = valid_post params[:id]
-      render_success_response(:ok, PostFormat, post, I18n.t("success.get_post"))
+      render_success_response(:ok, ConfirmPostFormat, post, I18n.t("success.get_post"))
     end
 
     desc "get all post for user"
+    params do
+      optional :country_id, type: String, allow_blank: false
+      optional :food_type_id, type: String, allow_blank: false
+    end
     get "/" do
-      posts = Post.all.filter_confirm(true)
-      render_success_response(:ok, PostFormat, posts, I18n.t("success.get_post"))
+      posts = Post.filter_confirm(true)
+      posts = posts.filter_country(params[:country_id]) if params[:country_id]
+      posts = posts.filter_food_type(params[:food_type_id]) if params[:food_type_id]
+      
+      for post in posts
+        post.bookmark_quantity = Bookmark.filter_post(post.id).count
+        if Bookmark.find_by(post_id: post.id, user_id: current_user.id)
+          post.is_bookmarked = true
+        else
+          post.is_bookmarked = false
+        end
+      end
+      render_success_response(:ok, ConfirmPostFormat, posts, I18n.t("success.get_post"))
     end
 
     desc "create post"
@@ -45,7 +60,7 @@ class PostApi < ApiV1
       data[:is_confirm] = false
       post = Post.create data
       if post.valid?
-        return render_success_response(:ok, PostFormat, post, I18n.t("success.signup"))
+        return render_success_response(:ok, UnconfirmPostFormat, post, I18n.t("success.signup"))
       else
         error!(I18n.t("errors.update"), :bad_request)
       end
@@ -67,7 +82,7 @@ class PostApi < ApiV1
 
       data = valid_params(params, Post::PARAMS)
       if post = Post.update(params[:id], data)
-        render_success_response(:ok, PostFormat, post, I18n.t("success.update"))
+        render_success_response(:ok, UnconfirmPostFormat, post, I18n.t("success.update"))
       else
         error! I18n.t("errors.update"), :bad_request
       end

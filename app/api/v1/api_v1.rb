@@ -7,4 +7,7 @@ class ApiV1 < Grape::API
   mount PostApi
   mount UserApi
   mount ResetPasswordApi
+  mount BookmarkApi
+  mount CountryApi
+  mount FoodTypeApi
 end

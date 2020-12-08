@@ -1,4 +1,4 @@
-class PostFormat < Grape::Entity
+class ConfirmPostFormat < Grape::Entity
   expose :id
   expose :user_name
   expose :title
@@ -8,4 +8,6 @@ class PostFormat < Grape::Entity
   expose :image
   expose :content
   expose :is_confirm
+  expose :bookmark_quantity
+  expose :is_bookmarked
 end
