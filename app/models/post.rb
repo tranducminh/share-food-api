@@ -17,10 +17,8 @@ class Post < ApplicationRecord
   scope :filter_country, ->(country_id) { where country_id: country_id}
   scope :filter_food_type, ->(food_type_id) { where food_type_id: food_type_id}
 
-  validates :title, presence: true, allow_nil: false,
-    length: {maximum: Settings.validations.post.title.max_length}
-  validates :content, presence: true, allow_nil: false,
-    length: {maximum: Settings.validations.post.content.max_length}
+  validates :title, presence: true, allow_nil: false
+  validates :content, presence: true, allow_nil: false
   validates :food_name, presence: true, allow_nil: false,
     length: {maximum: Settings.validations.post.food_name.max_length}
   validates :image, presence: true,

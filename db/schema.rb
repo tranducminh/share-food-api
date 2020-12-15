@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_053543) do
     t.string "food_name"
     t.boolean "is_confirm"
     t.string "image"
-    t.string "content"
+    t.text "content", size: :long
     t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.bigint "country_id", null: false

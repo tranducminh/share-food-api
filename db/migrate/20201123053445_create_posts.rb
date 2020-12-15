@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :food_name
       t.boolean :is_confirm
       t.string :image
-      t.string :content
+      t.longtext :content
       t.boolean :active, default: true
       
       t.references :user, null: false, foreign_key: true
