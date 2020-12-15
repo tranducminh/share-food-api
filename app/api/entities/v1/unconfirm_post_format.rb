@@ -1,6 +1,7 @@
 class UnconfirmPostFormat < Grape::Entity
   expose :id
   expose :user_name
+  expose :user_avatar
   expose :title
   expose :food_name
   expose :country_name

@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   belongs_to :food_type
   has_many :bookmarks, dependent: :nullify
 
-  delegate :name, to: :user, prefix: true
+  delegate :name, :avatar, to: :user, prefix: true
   delegate :name, to: :country, prefix: true
   delegate :name, to: :food_type, prefix: true
 

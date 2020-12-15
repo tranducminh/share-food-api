@@ -21,7 +21,18 @@ class PostApi < ApiV1
     desc "post details"
     get "/:id" do
       post = valid_post params[:id]
-      render_success_response(:ok, ConfirmPostFormat, post, I18n.t("success.get_post"))
+      post.bookmark_quantity = Bookmark.filter_post(post.id).filter_active(true).count
+        if Bookmark.find_by(post_id: post.id, user_id: current_user.id, active: true)
+          post.is_bookmarked = true
+        else
+          post.is_bookmarked = false
+        end
+      if post.is_confirm == true
+        render_success_response(:ok, ConfirmPostFormat, post, I18n.t("success.get_post"))
+      else 
+        valid_admin
+        render_success_response(:ok, ConfirmPostFormat, post, I18n.t("success.get_post"))
+      end
     end
 
     desc "get all post for user"
@@ -35,8 +46,8 @@ class PostApi < ApiV1
       posts = posts.filter_food_type(params[:food_type_id]) if params[:food_type_id]
       
       for post in posts
-        post.bookmark_quantity = Bookmark.filter_post(post.id).count
-        if Bookmark.find_by(post_id: post.id, user_id: current_user.id)
+        post.bookmark_quantity = Bookmark.filter_post(post.id).filter_active(true).count
+        if Bookmark.find_by(post_id: post.id, user_id: current_user.id, active: true)
           post.is_bookmarked = true
         else
           post.is_bookmarked = false

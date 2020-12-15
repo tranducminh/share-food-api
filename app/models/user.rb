@@ -18,7 +18,7 @@ class User < ApplicationRecord
     allow_nil: true
   validates :avatar, presence: true,
     allow_nil: true
-  validates :gender, allow_nil: true, inclusion: {presence: true, in: [0, 1]}
+  validates :gender, presence: true, allow_nil: true
   validates :is_admin, allow_nil: false, inclusion: {presence: true, in: [true, false]}
 
   before_save :downcase_email
