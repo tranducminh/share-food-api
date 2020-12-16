@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :gender
       t.boolean :is_admin
       t.string :birthday
-      t.string :avatar
+      t.string :avatar, default: 'https://redtridentinc.com/wp-content/uploads/2019/08/blank-profile-hi-300x225.png'
       t.boolean :active, default: true
       
       t.timestamps
