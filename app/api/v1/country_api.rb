@@ -1,9 +1,5 @@
 class CountryApi < ApiV1
   namespace :countries do
-    before do
-      authenticated
-    end
-
     desc "get all country"
     get "/" do
       render_success_response(:ok, CountryFormat, Country.filter_active(true), I18n.t("success.get_country"))
@@ -14,6 +10,7 @@ class CountryApi < ApiV1
       requires :name, type: String, message: I18n.t("errors.required")
     end
     post "/" do
+      authenticated
       country = Country.create({name: params[:name]})
       if country.valid?
         return render_success_response(:ok, CountryFormat, country, I18n.t("success.get_country"))

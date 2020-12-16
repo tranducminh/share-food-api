@@ -1,5 +1,23 @@
 class PostApi < ApiV1
   namespace :posts do
+    desc "get my post"
+    params do
+      optional :country_id, type: String, allow_blank: false
+      optional :food_type_id, type: String, allow_blank: false
+    end
+    get "/me" do
+      posts = User.find_by(id: current_user.id).posts
+      for post in posts
+        post.bookmark_quantity = Bookmark.filter_post(post.id).filter_active(true).count
+        if Bookmark.find_by(post_id: post.id, user_id: current_user.id, active: true)
+          post.is_bookmarked = true
+        else
+          post.is_bookmarked = false
+        end
+      end
+      render_success_response(:ok, ConfirmPostFormat, posts, I18n.t("success.get_post"))
+    end
+
     desc "get all post which not be confirmed for admin"
     get "/unconfirmed" do
       valid_admin
@@ -47,14 +65,16 @@ class PostApi < ApiV1
       
       for post in posts
         post.bookmark_quantity = Bookmark.filter_post(post.id).filter_active(true).count
-        if Bookmark.find_by(post_id: post.id, user_id: current_user.id, active: true)
-          post.is_bookmarked = true
-        else
-          post.is_bookmarked = false
-        end
+        # if Bookmark.find_by(post_id: post.id, user_id: current_user.id, active: true)
+        #   post.is_bookmarked = true
+        # else
+        #   post.is_bookmarked = false
+        # end
       end
       render_success_response(:ok, ConfirmPostFormat, posts, I18n.t("success.get_post"))
     end
+
+    
 
     desc "create post"
     params do
