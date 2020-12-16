@@ -5,4 +5,5 @@ class UserFormat < Grape::Entity
   expose :gender
   expose :birthday
   expose :avatar
+  expose :is_admin
 end
